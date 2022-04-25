@@ -1,12 +1,12 @@
 {
-  "name": "ec-cube/tinymceeditor",
+  "name": "ec-cube/wysiwygeditor",
   "version": "2.0.0",
-  "description": "TinyMCE Editor",
+  "description": "Wysiwyg Editor",
   "type": "eccube-plugin",
   "require": {
     "ec-cube/plugin-installer": "~0.0.6 || ^2.0"
   },
   "extra": {
-    "code": "TinyMceEditor"
+    "code": "WysiwygEditor"
   }
 }

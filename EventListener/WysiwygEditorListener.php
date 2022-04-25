@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\TinyMceEditor\EventListener;
+namespace Plugin\WysiwygEditor\EventListener;
 
 use Eccube\Common\EccubeConfig;
 use Eccube\Request\Context;
@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class TinyMceEditorListener implements EventSubscriberInterface
+class WysiwygEditorListener implements EventSubscriberInterface
 {
     /**
      * @var RequestStack
@@ -39,32 +39,36 @@ class TinyMceEditorListener implements EventSubscriberInterface
         }
         if ($this->requestContext->isAdmin()) {
 
+            
           log_info( '[AdminEditorWysiwyg]$event' , [$event] );
           $response = $event->getResponse();
           log_info( '[AdminEditorWysiwyg]$response' , [$response] );
           $content = $response->getContent();
+        //   $plugin_dir = $this->eccubeConfig['eccube_html_plugin_dir'] . "/WysiwygEditor/Resource/template/default/lib/summernote/dist/";
+        //   log_info( '[AdminEditorWysiwyg]$plugin_dir' , [$plugin_dir] );
           $code = <<< EOD
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.0.16/tinymce.min.js"></script>
+          
+          <!-- include summernote css/js -->
+          <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+          <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+      
           <!-- Initialize Quill editor -->
           <script>
-            let selector = Array(
-              '#page_admin_product_product_new .c-primaryCol textarea.form-control',
-              '#page_admin_product_product_edit .c-primaryCol textarea.form-control',
-              '#page_admin_content_news_edit .c-primaryCol textarea.form-control',
-              '#page_admin_content_news .c-primaryCol textarea.form-control',
-            );
-            selector = selector.join();
-
-            tinymce.init({
-                selector: selector,
-                language: "ja",
-                plugins: "textcolor table lists link link image code",
-                menubar: "false",
-                toolbar: ['undo redo | bold italic | styleselect | forecolor backcolor ',
-                          'numlist bullist | table | link | image'],
-                height: 500,
-                branding: false
+            $(document).ready(function() {
+                $('#page_admin_product_product_new .c-primaryCol textarea.form-control').summernote({
+                    height: 300, 
+                    minHeight: null, 
+                    maxHeight: null, 
+                    focus: true 
+                  });
             });
+            // let selector = Array(
+            //   '#page_admin_product_product_new .c-primaryCol textarea.form-control',
+            //   '#page_admin_product_product_edit .c-primaryCol textarea.form-control',
+            //   '#page_admin_content_news_edit .c-primaryCol textarea.form-control',
+            //   '#page_admin_content_news .c-primaryCol textarea.form-control',
+            // );
+            // selector = selector.join();
           </script></body>
 EOD;
         $content = str_replace( '</body>', $code, $content);
