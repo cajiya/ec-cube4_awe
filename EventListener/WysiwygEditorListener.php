@@ -55,8 +55,24 @@ class WysiwygEditorListener implements EventSubscriberInterface
           <!-- Initialize Quill editor -->
           <script>
             $(document).ready(function() {
+                var HelloButton = function (context) {
+                    var ui = $.summernote.ui;
+                    var button = ui.button({
+                      contents: '<i class="fa fa-child"/> Hello',
+                      click: function () {
+                        context.invoke('editor.insertText', 'hello');
+                      }
+                    });
+                    return button.render();   // return button as jquery object
+                }
                 $('#page_admin_product_product_new .c-primaryCol textarea.form-control').summernote({
                     height: 300, 
+                    // toolbar: [
+                    //     ['mybutton', ['hello']]
+                    // ],
+                    // buttons: {
+                    //     hello: HelloButton
+                    // },
                     minHeight: null, 
                     maxHeight: null, 
                     focus: true 
