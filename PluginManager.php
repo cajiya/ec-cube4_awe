@@ -35,11 +35,8 @@ class PluginManager extends AbstractPluginManager
     {
         $file_system = new Filesystem();
         
-        // error_log( print_r('tsst', true)."\r\n" , '3' , __DIR__ . '/debug.log');
         $eccubeconfig = $container->get('Eccube\Common\EccubeConfig');
 
-        var_dump($this->original_file_dir);
-        var_dump($eccubeconfig->get('eccube_html_plugin_dir'));
 
         $file_system->mirror(
             $this->original_file_dir.'lib/summernote' ,
@@ -52,9 +49,6 @@ class PluginManager extends AbstractPluginManager
         $file_system = new Filesystem();
         
         $eccubeconfig = $container->get('Eccube\Common\EccubeConfig');
-
-        var_dump($this->original_file_dir);
-        var_dump($eccubeconfig->get('eccube_html_plugin_dir'));
 
         $file_system->remove(
             $eccubeconfig->get('eccube_html_plugin_dir') . '/WysiwygEditor'
