@@ -71,7 +71,17 @@ class WysiwygEditorListener implements EventSubscriberInterface
         foreach( $selector_list as $selector )
         {
           $output .= <<< EOD
-              $('{$selector}').summernote({ height: 300 });
+              $('{$selector}').summernote({
+                height: 300,
+                // callbacks: {
+                //   onEnter: function (c) {
+                //     c.preventDefault();
+                //     console.log(this);
+                //     console.log(c.target.innerHTML);
+                //     // c.target.innerHTML.replace("<p><br></p><p><br></p>","<p><br></p>");
+                //   }
+                // }
+             });
 EOD;
         }
         $output .= '});</script>';
