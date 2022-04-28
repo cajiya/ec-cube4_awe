@@ -47,7 +47,7 @@
                                 {% for data in form.data %}
                                     <tr id="ex-masterdata-{{ data.vars.id }}">
                                         {{ form_widget(data.id) }}
-                                        <td class="align-middle text-right" colspan="1">admin/</div>
+                                        <td class="align-middle text-right" colspan="1">admin/</td>
                                         <td class="align-middle text-center" colspan="1">
                                             {{ form_widget(data.url_path) }}
                                             {{ form_errors(data.url_path) }}
@@ -81,7 +81,125 @@
                         </div>
                     </div>
                 </form>
+
+
+                <diiv class="card rounded border-0 mb-4">
+                    <div class="card-header">
+                        <div class="read">
+                        ヘルプ
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <thead>
+                            <tr>
+                                <th class="border-top-0 pt-2 pb-2 text-center" colspan="1">
+                                    反映箇所
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center" colspan="1">
+                                    URL
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center" colspan="1">
+                                    SELECTOR
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle text-center" colspan="1">
+                                        商品管理＞商品登録 [商品説明]
+                                        <br><small>商品編集画面含む</small>
+                                    </td>
+                                    <td class="align-middle text-center" colspan="1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="product/product/" readonly="readonly">
+                                            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="コピー完了">
+                                                <div class="input-group-text js-copy">Copy</div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td class="align-middle text-center" colspan="1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="textarea#admin_product_description_detail" readonly="readonly">
+                                            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="コピー完了">
+                                                <div class="input-group-text js-copy">Copy</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td class="align-middle text-center" colspan="1">
+                                        商品管理＞商品登録 [フリーエリア]
+                                        <br><small>商品編集画面含む</small>
+                                    </td>
+                                    <td class="align-middle text-center" colspan="1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="product/product/" readonly="readonly">
+                                            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="コピー完了">
+                                                <div class="input-group-text js-copy">Copy</div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="align-middle text-center" colspan="1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="textarea#wysiwyg-area" readonly="readonly">
+                                            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="コピー完了">
+                                                <div class="input-group-text js-copy">Copy</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="align-middle text-center" colspan="1">
+                                        コンテンツ管理＞新着情報管理 [本文]
+                                        <br><small>新規作成画面含む</small>
+                                    </td>
+                                    <td class="align-middle text-center" colspan="1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="content/news/" readonly="readonly">
+                                            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="コピー完了">
+                                                <div class="input-group-text js-copy">Copy</div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td class="align-middle text-center" colspan="1">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="textarea#admin_news_description" readonly="readonly">
+                                            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" title="コピー完了">
+                                                <div class="input-group-text js-copy">Copy</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </diiv>
+
+
             </div>
         </div>
     </div>
+    <script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger : 'click'
+        });
+
+        $('.js-copy').on('click',function(e){
+            $(this).parents('.input-group').eq(0).find('.form-control')[0].select();
+            document.execCommand("Copy");
+        });
+        
+    })
+</script>
 {% endblock %}
