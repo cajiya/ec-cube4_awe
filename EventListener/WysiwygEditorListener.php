@@ -73,6 +73,20 @@ class WysiwygEditorListener implements EventSubscriberInterface
           $output .= <<< EOD
               $('{$selector}').summernote({
                 height: 300,
+                toolbar: [
+                  // [groupName, [list of button]]
+                  
+                  ['style', ['style' ,'bold', 'italic', 'underline', 'strikethrough',  'clear']],
+                  ['color', ['color']],
+                  ['para', ['ul', 'ol', 'paragraph']],
+                  ['table', ['table']],
+                  ['insert', ['link', 'picture', 'video']],
+                  ['view', ['codeview']]
+                ],
+                styleTags: [
+                  'p', 'h1', 'h2', 'h3', 'h4'
+                ],
+                paragraphTags: []
                 // callbacks: {
                 //   onEnter: function (c) {
                 //     c.preventDefault();

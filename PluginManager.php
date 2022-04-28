@@ -37,10 +37,13 @@ class PluginManager extends AbstractPluginManager
         
         $eccubeconfig = $container->get('Eccube\Common\EccubeConfig');
 
-
         $file_system->mirror(
             $this->original_file_dir.'lib/summernote' ,
             $eccubeconfig->get('eccube_html_plugin_dir') . '/WysiwygEditor/summernote'
+        );
+        $file_system->mirror(
+            $this->original_file_dir.'css' ,
+            $eccubeconfig->get('eccube_html_plugin_dir') . '/WysiwygEditor/css'
         );
     }
 
