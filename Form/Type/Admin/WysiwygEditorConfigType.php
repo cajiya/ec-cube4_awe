@@ -55,6 +55,9 @@ class WysiwygEditorConfigType extends AbstractType
                     new Assert\Length([
                         'max' => $this->eccubeConfig['eccube_mtext_len'],
                     ]),
+                    new Assert\Regex([
+                        'pattern' => '/^[0-9a-zA-Z_\/\-]*$/',
+                    ]),
                 ],
             ])
             ->add('selector', TextType::class, [
@@ -62,6 +65,9 @@ class WysiwygEditorConfigType extends AbstractType
                 'constraints' => [
                     new Assert\Length([
                         'max' => $this->eccubeConfig['eccube_mtext_len'],
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^[0-9a-zA-Z_>~:\/\-\s#\.\+]*$/',
                     ]),
                 ],
             ])
