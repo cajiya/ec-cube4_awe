@@ -3,6 +3,7 @@
 管理画面のURL(PATH)と、textareaのSELECTORを設定することで、
 管理画面内の任意のテキストエリアをWysiwigEditor化することができるプラグイン。
 
+
 # インストール方法
 
 ```
