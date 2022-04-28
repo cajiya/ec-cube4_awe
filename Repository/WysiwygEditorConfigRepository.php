@@ -32,8 +32,6 @@ class WysiwygEditorConfigRepository extends AbstractRepository
     }
 
 
-
-
     /**
      * find all.
      *
