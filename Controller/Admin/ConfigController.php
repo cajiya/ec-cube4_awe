@@ -120,9 +120,10 @@ class ConfigController extends AbstractController
                         $config->setUrlPath($value['url_path']);
                         $config->setSelector($value['selector']);
                         $this->entityManager->persist($config);
-                    } elseif (!in_array($key, $ids)) {
+                    // } elseif (!in_array($key, $ids)) {
+                    } elseif ( $value['url_path'] === null && $value['selector'] === null ) {
                         // remove
-                        $delKey = $this->entityManager->getRepository(WysiwygEditorConfig::class)->find($key);
+                        $delKey = $this->entityManager->getRepository(WysiwygEditorConfig::class)->find( $value['id'] );
                         log_info('[wysiwygeditor]$delKey',[$delKey]);
                         // $delKey = $repository->find($value['id']);
                         if ($delKey) {
