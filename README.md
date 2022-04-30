@@ -1,4 +1,4 @@
-# EC-CUBE4.x用 WysiwygEditorプラグイン
+# EC-CUBE4.1用 WysiwygEditorプラグイン
 
 管理画面のURL(PATH)と、textareaのSELECTORを設定することで、
 管理画面内の任意のテキストエリアをWysiwigEditor化することができるプラグイン。
