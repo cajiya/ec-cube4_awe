@@ -1,12 +1,12 @@
 {
-  "name": "ec-cube/wysiwygeditor",
+  "name": "ec-cube/cjy-wysiwyg-editor",
   "version": "1.0.0",
-  "description": "Wysiwyg Editor",
+  "description": "EC-CUBE4.1系用 Wysiwyg Editor設定プラグイン",
   "type": "eccube-plugin",
   "require": {
     "ec-cube/plugin-installer": "~0.0.6 || ^2.0"
   },
   "extra": {
-    "code": "WysiwygEditor"
+    "code": "cjy-wysiwyg-editor"
   }
 }
