@@ -31,7 +31,7 @@ class Nav implements EccubeNav
                         'children' => [
                             'attachwysiwygeditor' => [
                                 'name' => 'AttachWysiwygEditor',
-                                'url' => 'wysiwyg_editor_admin_config',
+                                'url' => 'awe_admin_config',
                             ],
                         ],
                     ],
