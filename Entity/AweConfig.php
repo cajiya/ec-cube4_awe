@@ -11,19 +11,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor\Entity;
+namespace Plugin\AttachWysiwygEditor\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Eccube\Entity\AbstractEntity;
 
 
 /**
- * WysiwygEditorConfig
+ * AweConfig
  *
  * @ORM\Table(name="plg_wysiwyg_editor_settings")
- * @ORM\Entity(repositoryClass="Plugin\WysiwygEditor\Repository\WysiwygEditorConfigRepository")
+ * @ORM\Entity(repositoryClass="Plugin\AttachWysiwygEditor\Repository\AweConfigRepository")
  */
-class WysiwygEditorConfig extends AbstractEntity
+class AweConfig extends AbstractEntity
 {
     /**
      * @var int
@@ -55,7 +55,7 @@ class WysiwygEditorConfig extends AbstractEntity
      *
      * @param int $id
      *
-     * @return WysiwygEditorConfig
+     * @return AweConfig
      */
     public function setId(int $id = null)
     {
@@ -78,7 +78,7 @@ class WysiwygEditorConfig extends AbstractEntity
      *
      * @param string $url_path
      *
-     * @return WysiwygEditorConfig
+     * @return AweConfig
      */
     public function setUrlPath( $url_path )
     {
@@ -99,7 +99,7 @@ class WysiwygEditorConfig extends AbstractEntity
      *
      * @param string $selector
      *
-     * @return WysiwygEditorConfig
+     * @return AweConfig
      */
     public function setSelector( $selector )
     {

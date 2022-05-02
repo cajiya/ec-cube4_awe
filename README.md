@@ -1,4 +1,4 @@
-# EC-CUBE4.1用 WysiwygEditorプラグイン
+# EC-CUBE4.1用 AttachWysiwygEditorプラグイン
 
 管理画面のURL(PATH)と、textareaのSELECTORを設定することで、
 管理画面内の任意のテキストエリアをWysiwigEditor化することができるプラグイン。
@@ -8,9 +8,9 @@
 
 ```
 cd app/Plugin;
-git clone https://github.com/cajiya/ec-cube4_wysiwig-editor.git;
-mv ec-cube4_wysiwig-editor WysiwygEditor;
+git clone https://github.com/cajiya/ec-cube4_awe.git;
+mv ec-cube4_awe AttachWysiwygEditor;
 cd ../../;
-php bin/console eccube:plugin:install --code="WysiwygEditor"
+php bin/console eccube:plugin:install --code="AttachWysiwygEditor"
 ```
 

@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor\Form\Type\Admin;
+namespace Plugin\AttachWysiwygEditor\Form\Type\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -21,14 +21,14 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class WysiwygEditorConfigCollectionType extends AbstractType
+class AweConfigCollectionType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('data', CollectionType::class, [
-                'entry_type' => WysiwygEditorConfigType::class,
+                'entry_type' => AweConfigType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,

@@ -11,24 +11,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor\Repository;
+namespace Plugin\AttachWysiwygEditor\Repository;
 
 
 use Eccube\Repository\AbstractRepository;
-use Plugin\WysiwygEditor\Entity\WysiwygEditorConfig;
+use Plugin\AttachWysiwygEditor\Entity\AweConfig;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query;
 
 
 
-class WysiwygEditorConfigRepository extends AbstractRepository
+class AweConfigRepository extends AbstractRepository
 {
     /**
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, WysiwygEditorConfig::class);
+        parent::__construct($registry, AweConfig::class);
     }
 
 
@@ -41,7 +41,7 @@ class WysiwygEditorConfigRepository extends AbstractRepository
     {
         $query = $this
             ->getEntityManager()
-            ->createQuery('SELECT m FROM Plugin\WysiwygEditor\Entity\WysiwygEditorConfig m ORDER BY m.id DESC');
+            ->createQuery('SELECT m FROM Plugin\AttachWysiwygEditor\Entity\AweConfig m ORDER BY m.id DESC');
         $result = $query
             ->getResult(Query::HYDRATE_ARRAY);
 

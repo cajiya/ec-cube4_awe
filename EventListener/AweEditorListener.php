@@ -1,20 +1,20 @@
 <?php
 
-namespace Plugin\WysiwygEditor\EventListener;
+namespace Plugin\AttachWysiwygEditor\EventListener;
 
 use Eccube\Common\EccubeConfig;
 use Eccube\Request\Context;
 use Eccube\Event\TemplateEvent;
 
-use Plugin\WysiwygEditor\Entity\WysiwygEditorConfig;
-use Plugin\WysiwygEditor\Repository\WysiwygEditorConfigRepository;
+use Plugin\AttachWysiwygEditor\Entity\AweConfig;
+use Plugin\AttachWysiwygEditor\Repository\AweConfigRepository;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class WysiwygEditorListener implements EventSubscriberInterface
+class AweEditorListener implements EventSubscriberInterface
 {
     /**
      * @var RequestStack
@@ -31,19 +31,19 @@ class WysiwygEditorListener implements EventSubscriberInterface
      */
     protected $requestContext;
 
-    protected $wysiwygEditorConfigRepository;
+    protected $aweConfigRepository;
 
     public function __construct(
       RequestStack $requestStack,
       EccubeConfig $eccubeConfig,
       Context $requestContext,
-      WysiwygEditorConfigRepository $wysiwygEditorConfigRepository
+      AweConfigRepository $aweConfigRepository
     )
     {
         $this->requestStack = $requestStack;
         $this->eccubeConfig = $eccubeConfig;
         $this->requestContext = $requestContext;
-        $this->wysiwygEditorConfigRepository = $wysiwygEditorConfigRepository;
+        $this->aweConfigRepository = $aweConfigRepository;
     }
 
     public function adminInsertWysiwygEditorTag(TemplateEvent $event)
@@ -51,7 +51,7 @@ class WysiwygEditorListener implements EventSubscriberInterface
       $output;
       $selector_list = [];
       $wysiwyg_frag = false;
-      $wysiwyg_config = $this->wysiwygEditorConfigRepository->findAll();
+      $wysiwyg_config = $this->aweConfigRepository->findAll();
       $currentRequest = $this->requestStack->getCurrentRequest();
       $request_path = $currentRequest->getPathInfo();
       $setting_path;
@@ -66,7 +66,7 @@ class WysiwygEditorListener implements EventSubscriberInterface
       }
       if( $wysiwyg_frag )
       {
-        $fileDir = $this->eccubeConfig['eccube_html_dir'] . '/WysiwygEditor/summernote/dist';
+        $fileDir = $this->eccubeConfig['eccube_html_dir'] . '/AttachWysiwygEditor/summernote/dist';
         $output = '<script>$(document).ready(function() {';
         foreach( $selector_list as $selector )
         {
@@ -100,7 +100,7 @@ EOD;
         }
         $output .= '});</script>';
 
-        $event->addSnippet( '@WysiwygEditor/admin/wysiwygeditor.twig' );
+        $event->addSnippet( '@AttachWysiwygEditor/admin/awe.twig' );
         $event->addSnippet( $output , false);
 
       }
