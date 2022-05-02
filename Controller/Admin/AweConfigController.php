@@ -11,39 +11,41 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor\Controller\Admin;
+namespace Plugin\AttachWysiwygEditor\Controller\Admin;
 
 use Eccube\Controller\AbstractController;
 
-// use Plugin\WysiwygEditor\Form\Type\Admin\ProductReviewConfigType;
-use Plugin\WysiwygEditor\Entity\WysiwygEditorConfig;
-use Plugin\WysiwygEditor\Repository\WysiwygEditorConfigRepository;
-use Plugin\WysiwygEditor\Form\Type\Admin\WysiwygEditorConfigCollectionType;
-use Plugin\WysiwygEditor\Form\Type\Admin\WysiwygEditorConfigType;
+// use Plugin\AttachWysiwygEditor\Form\Type\Admin\ProductReviewConfigType;
+use Plugin\AttachWysiwygEditor\Entity\AweConfig;
+use Plugin\AttachWysiwygEditor\Repository\AweConfigRepository;
+use Plugin\AttachWysiwygEditor\Form\Type\Admin\AweConfigCollectionType;
+use Plugin\AttachWysiwygEditor\Form\Type\Admin\AweConfigType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ConfigController.
+ * Class AweConfigController.
  */
-class ConfigController extends AbstractController
+class AweConfigController extends AbstractController
 {
 
+    protected $aweConfigRepository;
+
     /**
-     * WysiwygEditorController constructor.
+     * AweController constructor.
      *
-     * @param WysiwygEditorConfigRepository $WysiwygEditorConfigRepository
+     * @param AweConfigRepository $aweConfigRepository
      */
     public function __construct(
-        WysiwygEditorConfigRepository $WysiwygEditorConfigRepository
+        AweConfigRepository $aweConfigRepository
     ) {
-        $this->WysiwygEditorConfigRepository = $WysiwygEditorConfigRepository;
+        $this->aweConfigRepository = $aweConfigRepository;
     }
 
     /**
-     * @Route("/%eccube_admin_route%/wysiwyg_editor/config", name="wysiwyg_editor_admin_config")
-     * @Template("@WysiwygEditor/admin/config.twig")
+     * @Route("/%eccube_admin_route%/awe/config", name="awe_admin_config")
+     * @Template("@AttachWysiwygEditor/admin/config.twig")
      *
      * @return array
      */
@@ -52,7 +54,7 @@ class ConfigController extends AbstractController
 
         $data = [];
         try {
-            $configs = $this->WysiwygEditorConfigRepository->findAll();
+            $configs = $this->aweConfigRepository->findAll();
             $data['data'] = [];
             foreach ($configs as $value) {
                 $data['data'][$value['id']]['id'] = $value['id'];
@@ -68,7 +70,7 @@ class ConfigController extends AbstractController
         }
 
 
-        $builder = $this->formFactory->createBuilder(WysiwygEditorConfigCollectionType::class, $data);
+        $builder = $this->formFactory->createBuilder(AweConfigCollectionType::class, $data);
         $form = $builder->getForm();
         $form_view = $form->createView();
         log_info('[wysiwygeditor]$form_view',[$form_view]);
@@ -81,12 +83,12 @@ class ConfigController extends AbstractController
 
 
     /**
-     * @Route("/%eccube_admin_route%/wysiwyg_editor/config/edit", name="wysiwyg_editor_admin_config_edit", methods={"GET", "POST"})
-     * @Template("@WysiwygEditor/admin/config.twig")
+     * @Route("/%eccube_admin_route%/awe/config/edit", name="awe_admin_config_edit", methods={"GET", "POST"})
+     * @Template("@AttachWysiwygEditor/admin/config.twig")
      */
     public function edit(Request $request)
     {
-        $builder = $this->formFactory->createBuilder(WysiwygEditorConfigCollectionType::class);
+        $builder = $this->formFactory->createBuilder(AweConfigCollectionType::class);
 
         $form = $builder->getForm();
 
@@ -103,7 +105,7 @@ class ConfigController extends AbstractController
                     $data['data']
                 ));
 
-                $repository = $this->entityManager->getRepository(WysiwygEditorConfig::class);
+                $repository = $this->entityManager->getRepository(AweConfig::class);
                 log_info('[wysiwygeditor]$data',[$data]);
                 log_info('[wysiwygeditor]$data["data"]',[$data['data']]);
 
@@ -114,7 +116,7 @@ class ConfigController extends AbstractController
                         log_info('[wysiwygeditor]$config',[$config]);
 
                         if ($config === null) {
-                            $config = new WysiwygEditorConfig();
+                            $config = new AweConfig();
                         }
                         $config->setId($value['id']);
                         $config->setUrlPath($value['url_path']);
@@ -123,7 +125,7 @@ class ConfigController extends AbstractController
                     // } elseif (!in_array($key, $ids)) {
                     } elseif ( $value['url_path'] === null && $value['selector'] === null ) {
                         // remove
-                        $delKey = $this->entityManager->getRepository(WysiwygEditorConfig::class)->find( $value['id'] );
+                        $delKey = $this->entityManager->getRepository(AweConfig::class)->find( $value['id'] );
                         log_info('[wysiwygeditor]$delKey',[$delKey]);
                         // $delKey = $repository->find($value['id']);
                         if ($delKey) {
@@ -140,7 +142,7 @@ class ConfigController extends AbstractController
                     $this->addError('admin.common.save_error', 'admin');
                 }
 
-                return $this->redirectToRoute('wysiwyg_editor_admin_config');
+                return $this->redirectToRoute('awe_admin_config');
             }
         }
 

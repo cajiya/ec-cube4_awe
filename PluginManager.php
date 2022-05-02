@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor;
+namespace Plugin\AttachWysiwygEditor;
 
 use Eccube\Common\EccubeConfig;
 use Eccube\Plugin\AbstractPluginManager;
@@ -39,11 +39,11 @@ class PluginManager extends AbstractPluginManager
 
         $file_system->mirror(
             $this->original_file_dir.'lib/summernote' ,
-            $eccubeconfig->get('eccube_html_plugin_dir') . '/WysiwygEditor/summernote'
+            $eccubeconfig->get('eccube_html_plugin_dir') . '/awe/summernote'
         );
         $file_system->mirror(
             $this->original_file_dir.'css' ,
-            $eccubeconfig->get('eccube_html_plugin_dir') . '/WysiwygEditor/css'
+            $eccubeconfig->get('eccube_html_plugin_dir') . '/awe/css'
         );
     }
 
@@ -54,7 +54,7 @@ class PluginManager extends AbstractPluginManager
         $eccubeconfig = $container->get('Eccube\Common\EccubeConfig');
 
         $file_system->remove(
-            $eccubeconfig->get('eccube_html_plugin_dir') . '/WysiwygEditor'
+            $eccubeconfig->get('eccube_html_plugin_dir') . '/awe'
         );
     }
 

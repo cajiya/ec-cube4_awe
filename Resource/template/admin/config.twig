@@ -11,17 +11,17 @@
 
 {% extends '@admin/default_frame.twig' %}
 
-{% set menus = ['setting', 'system', 'wysiwygeditor'] %}
+{% set menus = ['setting', 'system', 'attachwysiwygeditor'] %}
 
 {% block title %}{{ 'リッチエディタ反映先設定'|trans }}{% endblock %}
-{% block sub_title %}{{ 'Wysiwyg Editor Plugin Settings'|trans }}{% endblock %}
+{% block sub_title %}{{ 'Attach Wysiwyg Editor Settings'|trans }}{% endblock %}
 
 {% block main %}
     <div class="c-contentsArea__cols">
         <div class="c-contentsArea__primaryCol">
             <div class="c-primaryCol">
 
-                <form id="form" name="form" method="post" action="{{ url('wysiwyg_editor_admin_config_edit') }}">
+                <form id="form" name="form" method="post" action="{{ url('awe_admin_config_edit') }}">
                     {{ form_widget(form._token) }}
                     <div class="card rounded border-0 mb-4">
                         <div class="card-header">

@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor\Form\Type\Admin;
+namespace Plugin\AttachWysiwygEditor\Form\Type\Admin;
 
 use Eccube\Common\EccubeConfig;
 use Symfony\Component\Form\AbstractType;
@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class WysiwygEditorConfigType extends AbstractType
+class AweConfigType extends AbstractType
 {
 
     /**

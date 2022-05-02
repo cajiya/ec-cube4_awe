@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Plugin\WysiwygEditor;
+namespace Plugin\AttachWysiwygEditor;
 
 use Eccube\Common\EccubeNav;
 
@@ -29,8 +29,8 @@ class Nav implements EccubeNav
                 'children' => [
                     'system' => [
                         'children' => [
-                            'wysiwygeditor' => [
-                                'name' => 'WysiwygEditor',
+                            'attachwysiwygeditor' => [
+                                'name' => 'AttachWysiwygEditor',
                                 'url' => 'wysiwyg_editor_admin_config',
                             ],
                         ],
