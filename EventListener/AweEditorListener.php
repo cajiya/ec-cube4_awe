@@ -48,6 +48,16 @@ class AweEditorListener implements EventSubscriberInterface
 
     public function adminInsertWysiwygEditorTag(TemplateEvent $event)
     {
+      // 拡張されるファイルに充てたSnipetsの退避
+      $snipets = $event->getParameter('plugin_snippets');
+      if( $snipets )
+      {
+        foreach( $snipets as $snippet => $include )
+        {
+          $event->addSnippet( $snippet , $include);
+        }
+      }
+
       $output;
       $selector_list = [];
       $wysiwyg_frag = false;
@@ -99,10 +109,9 @@ class AweEditorListener implements EventSubscriberInterface
 EOD;
         }
         $output .= '});</script>';
-
+        
         $event->addSnippet( '@AttachWysiwygEditor/admin/awe.twig' );
         $event->addSnippet( $output , false);
-
       }
     }
 
