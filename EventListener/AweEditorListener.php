@@ -49,12 +49,15 @@ class AweEditorListener implements EventSubscriberInterface
     public function adminInsertWysiwygEditorTag(TemplateEvent $event)
     {
       // 拡張されるファイルに充てたSnipetsの退避
-      $snipets = $event->getParameter('plugin_snippets');
-      if( $snipets )
+      if( $event->hasParameter('plugin_snippets') )
       {
-        foreach( $snipets as $snippet => $include )
+        $snipets = $event->getParameter('plugin_snippets');
+        if( $snipets )
         {
-          $event->addSnippet( $snippet , $include);
+          foreach( $snipets as $snippet => $include )
+          {
+            $event->addSnippet( $snippet , $include);
+          }
         }
       }
 
@@ -65,6 +68,7 @@ class AweEditorListener implements EventSubscriberInterface
       $currentRequest = $this->requestStack->getCurrentRequest();
       $request_path = $currentRequest->getPathInfo();
       $setting_path;
+
       foreach( $wysiwyg_config as $config)
       {
         $setting_path = '/'.$this->eccubeConfig['eccube_admin_route'].'/'.$config['url_path'];
