@@ -1,16 +1,5 @@
 <?php
 
-/*
- * This file is part of EC-CUBE
- *
- * Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
- *
- * http://www.ec-cube.co.jp/
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Plugin\AttachWysiwygEditor\Controller\Admin;
 
 use Eccube\Controller\AbstractController;
@@ -73,7 +62,6 @@ class AweConfigController extends AbstractController
         $builder = $this->formFactory->createBuilder(AweConfigCollectionType::class, $data);
         $form = $builder->getForm();
         $form_view = $form->createView();
-        log_info('[wysiwygeditor]$form_view',[$form_view]);
 
         return [
             'form' => $form->createView(),
@@ -106,14 +94,11 @@ class AweConfigController extends AbstractController
                 ));
 
                 $repository = $this->entityManager->getRepository(AweConfig::class);
-                log_info('[wysiwygeditor]$data',[$data]);
-                log_info('[wysiwygeditor]$data["data"]',[$data['data']]);
 
                 foreach ($data['data'] as $key => $value ) {
                     
                     if ($value['id'] !== null && $value['url_path'] !== null && $value['selector'] !== null) {
                         $config = $repository->find($value['id']);
-                        log_info('[wysiwygeditor]$config',[$config]);
 
                         if ($config === null) {
                             $config = new AweConfig();
@@ -122,12 +107,11 @@ class AweConfigController extends AbstractController
                         $config->setUrlPath($value['url_path']);
                         $config->setSelector($value['selector']);
                         $this->entityManager->persist($config);
-                    // } elseif (!in_array($key, $ids)) {
+
                     } elseif ( $value['url_path'] === null && $value['selector'] === null ) {
+
                         // remove
                         $delKey = $this->entityManager->getRepository(AweConfig::class)->find( $value['id'] );
-                        log_info('[wysiwygeditor]$delKey',[$delKey]);
-                        // $delKey = $repository->find($value['id']);
                         if ($delKey) {
                             $this->entityManager->remove($delKey);
                         }
@@ -138,6 +122,7 @@ class AweConfigController extends AbstractController
                     $this->entityManager->flush();
                     $this->addSuccess('admin.common.save_complete', 'admin');
                 } catch (\Exception $e) {
+                    
                     // 外部キー制約などで削除できない場合に例外エラーになる
                     $this->addError('admin.common.save_error', 'admin');
                 }

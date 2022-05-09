@@ -89,7 +89,6 @@ class AweEditorListener implements EventSubscriberInterface
                 height: 300,
                 toolbar: [
                   // [groupName, [list of button]]
-                  
                   ['style', ['style' ,'bold', 'italic', 'underline', 'strikethrough',  'clear']],
                   ['color', ['color']],
                   ['para', ['ul', 'ol', 'paragraph']],
