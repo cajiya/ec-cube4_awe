@@ -1,11 +1,11 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor\Repository;
+namespace Plugin\AttachWysiwygEditor42\Repository;
 
 
 use Eccube\Repository\AbstractRepository;
-use Plugin\AttachWysiwygEditor\Entity\AweConfig;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Plugin\AttachWysiwygEditor42\Entity\AweConfig;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
 
 
@@ -13,9 +13,9 @@ use Doctrine\ORM\Query;
 class AweConfigRepository extends AbstractRepository
 {
     /**
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, AweConfig::class);
     }
@@ -30,7 +30,7 @@ class AweConfigRepository extends AbstractRepository
     {
         $query = $this
             ->getEntityManager()
-            ->createQuery('SELECT m FROM Plugin\AttachWysiwygEditor\Entity\AweConfig m ORDER BY m.id DESC');
+            ->createQuery('SELECT m FROM Plugin\AttachWysiwygEditor42\Entity\AweConfig m ORDER BY m.id DESC');
         $result = $query
             ->getResult(Query::HYDRATE_ARRAY);
 

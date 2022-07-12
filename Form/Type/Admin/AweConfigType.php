@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor\Form\Type\Admin;
+namespace Plugin\AttachWysiwygEditor42\Form\Type\Admin;
 
 use Eccube\Common\EccubeConfig;
 use Symfony\Component\Form\AbstractType;

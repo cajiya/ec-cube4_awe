@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor\Entity;
+namespace Plugin\AttachWysiwygEditor42\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Eccube\Entity\AbstractEntity;
@@ -10,7 +10,7 @@ use Eccube\Entity\AbstractEntity;
  * AweConfig
  *
  * @ORM\Table(name="plg_wysiwyg_editor_settings")
- * @ORM\Entity(repositoryClass="Plugin\AttachWysiwygEditor\Repository\AweConfigRepository")
+ * @ORM\Entity(repositoryClass="Plugin\AttachWysiwygEditor42\Repository\AweConfigRepository")
  */
 class AweConfig extends AbstractEntity
 {

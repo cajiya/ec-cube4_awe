@@ -1,14 +1,14 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor\Controller\Admin;
+namespace Plugin\AttachWysiwygEditor42\Controller\Admin;
 
 use Eccube\Controller\AbstractController;
 
-// use Plugin\AttachWysiwygEditor\Form\Type\Admin\ProductReviewConfigType;
-use Plugin\AttachWysiwygEditor\Entity\AweConfig;
-use Plugin\AttachWysiwygEditor\Repository\AweConfigRepository;
-use Plugin\AttachWysiwygEditor\Form\Type\Admin\AweConfigCollectionType;
-use Plugin\AttachWysiwygEditor\Form\Type\Admin\AweConfigType;
+// use Plugin\AttachWysiwygEditor42\Form\Type\Admin\ProductReviewConfigType;
+use Plugin\AttachWysiwygEditor42\Entity\AweConfig;
+use Plugin\AttachWysiwygEditor42\Repository\AweConfigRepository;
+use Plugin\AttachWysiwygEditor42\Form\Type\Admin\AweConfigCollectionType;
+use Plugin\AttachWysiwygEditor42\Form\Type\Admin\AweConfigType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class AweConfigController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/awe/config", name="awe_admin_config")
-     * @Template("@AttachWysiwygEditor/admin/config.twig")
+     * @Template("@AttachWysiwygEditor42/admin/config.twig")
      *
      * @return array
      */
@@ -72,7 +72,7 @@ class AweConfigController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/awe/config/edit", name="awe_admin_config_edit", methods={"GET", "POST"})
-     * @Template("@AttachWysiwygEditor/admin/config.twig")
+     * @Template("@AttachWysiwygEditor42/admin/config.twig")
      */
     public function edit(Request $request)
     {

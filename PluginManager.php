@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor;
+namespace Plugin\AttachWysiwygEditor42;
 
 use Eccube\Common\EccubeConfig;
 use Eccube\Plugin\AbstractPluginManager;

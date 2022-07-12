@@ -1,18 +1,18 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor\EventListener;
+namespace Plugin\AttachWysiwygEditor42\EventListener;
 
 use Eccube\Common\EccubeConfig;
 use Eccube\Request\Context;
 use Eccube\Event\TemplateEvent;
 
-use Plugin\AttachWysiwygEditor\Entity\AweConfig;
-use Plugin\AttachWysiwygEditor\Repository\AweConfigRepository;
+use Plugin\AttachWysiwygEditor42\Entity\AweConfig;
+use Plugin\AttachWysiwygEditor42\Repository\AweConfigRepository;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+// use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class AweEditorListener implements EventSubscriberInterface
 {
@@ -80,7 +80,7 @@ class AweEditorListener implements EventSubscriberInterface
       }
       if( $wysiwyg_frag )
       {
-        $fileDir = $this->eccubeConfig['eccube_html_dir'] . '/AttachWysiwygEditor/summernote/dist';
+        $fileDir = $this->eccubeConfig['eccube_html_dir'] . '/AttachWysiwygEditor42/summernote/dist';
         $output = '<script>$(document).ready(function() {';
         foreach( $selector_list as $selector )
         {
@@ -113,7 +113,7 @@ EOD;
         }
         $output .= '});</script>';
         
-        $event->addSnippet( '@AttachWysiwygEditor/admin/awe.twig' );
+        $event->addSnippet( '@AttachWysiwygEditor42/admin/awe.twig' );
         $event->addSnippet( $output , false);
       }
     }

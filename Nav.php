@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor;
+namespace Plugin\AttachWysiwygEditor42;
 
 use Eccube\Common\EccubeNav;
 
@@ -19,7 +19,7 @@ class Nav implements EccubeNav
                     'system' => [
                         'children' => [
                             'attachwysiwygeditor' => [
-                                'name' => 'AttachWysiwygEditor',
+                                'name' => 'リッチエディタ設定',
                                 'url' => 'awe_admin_config',
                             ],
                         ],
