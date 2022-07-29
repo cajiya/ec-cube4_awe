@@ -1,0 +1,127 @@
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+<html lang="{{ eccube_config.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AWE media library</title>
+    <link rel="icon" href="{{ asset('assets/img/favicon.ico', 'admin') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css', 'admin') }}">
+</head>
+<body id="page_{{ app.request.get('_route') }}">
+
+    <form name="form1" id="form1" method="post" action="?" enctype="multipart/form-data" style="background: #eff0f4;">
+        <input type="hidden" id="awe_m_i_mode" name="mode" value=""/>
+        <input type="hidden" id="awe_m_i_now_dir" name="now_dir" value="{{ tpl_now_dir }}"/>
+        <input type="hidden" id="awe_m_i_tree_select_file" name="tree_select_file" value="{{ tpl_now_dir }}"/>
+        {{ form_widget(form._token) }}
+        <div class="c-outsideBlock">
+
+            <div class="c-contentsArea__cols pt-3 pb-3">
+
+                <div class="c-contentsArea__primaryCol">
+                    <div class="c-primaryCol">
+                        <div class="card rounded border-0">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-12"><span class="card-title">{{ 'admin.content.file.file_list__card_title'|trans }}</span></div>
+                                </div>
+                            </div>
+                            <div class="collapse show ec-cardCollapse" id="fileList">
+                                <div class="card-body">
+                                    <div class="row">
+                                    {% if tpl_is_top_dir == false %}
+                                    <div class="col-3">
+                                        <div class="card mb-4 shadow-sm">
+                                            <div class="card-body js-action-dir-open btn btn-outline-primary" data-path="{{ tpl_parent_dir }}">
+                                                <i class="fa fa-folder-o fa-2x"></i><span class="ml-3">..</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% set flag_dir_row = true %}
+                                    {% for file in arrFileList %}
+                                        {% if file.is_dir == false and flag_dir_row %}
+                                        {% set flag_dir_row = false %}
+                                        {# dir → file の切り替わりタイミング #}
+                                        </div>
+                                        <div class="row">
+                                        {% endif %}
+
+                                        {% if file.is_dir %}
+                                            <div class="col-3">
+                                                <div class="card mb-4 shadow-sm">
+                                                    <div class="card-body js-action-dir-open btn btn-outline-primary" data-path="{{ file.file_path }}">
+                                                        <i class="fa fa-folder-o fa-2x"></i><span class="ml-3">{{ file.file_name }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if file.is_dir == false %}
+                                            <div class="col-3">
+                                            
+                                            <div class="card mb-4 shadow-sm">
+                                                <img class="card-img-top" alt="Thumbnail [100%x225]" src="{{ asset('', 'user_data') }}{{ file.file_path|slice(1) }}">
+                                                <div class="card-body p-2">
+                                                    <div class="small mb-2">{{ file.file_name }}（{{ file.file_size }}）</div>
+                                                    <button type="button" class="btn btn-outline-primary btn-block js-action-insert" data-url="{{asset('', 'user_data')}}{{ file.file_path|slice(1) }}"><i class="fas fa-paperclip" aria-hidden="true"></i> 画像を挿入する</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="c-outsideBlock__contents pb-3">
+                <div class="card rounded border-0">
+                    <div class="card-body">
+                        <div id="upload_box__file" class="row mb-2">
+                            <div class="col-2" ><span>{{ 'admin.content.file.add_file'|trans }}</span></div>
+                            <div class="col mb-3">
+                                <div class="mb-2">
+                                    {{ form_widget(form.file, {attr: {class: 'js-file-set'}}) }}{# TODO input type="file" の装飾 #}
+                                    
+                                </div>
+                                <div class="mb-2">
+                                    <button type="button" class="btn btn-outline-primary js-action-upload" >{{ 'admin.common.upload'|trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2"><span>{{ 'admin.content.file.add_directory'|trans }}</span></div>
+                            <div class="col">
+                                <div class="form-row">
+                                    <div class="col-3">
+                                        {{ form_widget(form.create_file, {attr: {placeholder: 'admin.content.file.directory_name'}}) }}
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-outline-primary js-action-create" >{{ 'admin.common.create__new'|trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="small text-right">※画像やフォルダの削除は、「コンテンツ管理＞ファイル管理」より行ってください。</p>
+                        </div>
+                        {% for error in errors %}
+                            <p class="text-danger errormsg">{{ error.message|trans }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+
+
+</body>
+</html>

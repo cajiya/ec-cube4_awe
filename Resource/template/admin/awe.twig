@@ -1,5 +1,141 @@
 <!-- include summernote css/js -->
+<div class="modal fade" id="awe_media_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">メディア</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="awe_media_modal_body"></div>
+        </div>
+    </div>
+</div>
 <link href="{{ url('homepage') }}html/plugin//awe/summernote/dist/summernote-bs4.css" rel="stylesheet">
 <link href="{{ url('homepage') }}html/plugin//awe/css/editor.css" rel="stylesheet">
 <script src="{{ url('homepage') }}html/plugin//awe/summernote/dist/summernote.js"></script>
+<script src="{{ asset('assets/js/file_manager.js', 'admin') }}"></script>
+
+<script>
+
+    $(document).ready(function () {
+        awe.modalElm.on('hidden.bs.modal', function (e) {
+            awe.modalBodyElm.html('');
+        })
+    });
+    window.awe = {
+        modalElm: $('#awe_media_modal'),
+        modalBodyElm: $('#awe_media_modal_body'),
+        now_dir: '/',
+        dirPath: null,
+        snContext: null,
+        mode: null,
+        openModal: function(buttonElm,event){
+            this.modalElm.modal('show');
+            this.updateMediaBody();
+        },
+        closeModal: function(){
+            awe.modalBodyElm.html('');
+            awe.modalElm.modal('hide');
+        },
+        findFormFromHtmlString: function( data ){
+            var doc = new DOMParser().parseFromString(data, "text/html");
+            return doc.body.querySelector('form');
+        },
+        updateMediaBody: function( mode ){
+            var ajaxOption = {
+                url: '{{ url("awe_admin_media") }}',
+                type: 'POST'
+            };
+            if( mode === 'upload' ){
+                ajaxOption.contentType = false;
+                ajaxOption.processData = false;
+                ajaxOption.data = new FormData(awe.modalBodyElm.find('form')[0]);
+            }else{
+                ajaxOption.data = {};
+            }
+            if( mode === 'create' ){
+                ajaxOption.data.mode = 'create';
+                ajaxOption.data['form[_token]'] = awe.modalBodyElm.find('#form__token').val();
+                ajaxOption.data['form[create_file]'] = awe.modalBodyElm.find('#form_create_file').val();
+            }else{
+                ajaxOption.data.tree_select_file = awe.now_dir;
+            }
+
+            awe.modalBodyElm.html('');
+            $.ajax(ajaxOption).then(function (data) {
+                var fm = awe.findFormFromHtmlString( data );
+                awe.modalBodyElm.append( fm );
+                awe.setMediaElmsJsEvent();
+            }, function (err) {
+                console.log(err);
+            });
+            awe.mode = null;
+        },
+        setMediaElmsJsEvent: function(){
+            awe.modalBodyElm.find('.js-action-insert').on('click', function (e) {
+                awe.snContext.invoke('editor.insertImage', location.origin + "/" + $(this).data('url'));
+                awe.closeModal();
+            });
+            awe.modalBodyElm.find('.js-file-set').on('change', function (e) {
+                if (window.File) {
+                    // 指定したファイルの情報を取得
+                    var inputfile = fileform.files[0];
+                    // 最後に、反映
+                    result.text = inputfile.name;
+                }
+            });
+            
+            awe.modalBodyElm.find('.js-action-dir-open').on('click', function (e) {
+                console.log($(this).data('path'));
+                awe.modalBodyElm.find('#awe_m_i_now_dir').val( $(this).data('path') );
+                awe.now_dir = awe.modalBodyElm.find('#awe_m_i_now_dir').val();
+                awe.updateMediaBody();
+            });
+            awe.modalBodyElm.find('.js-action-create').on('click', function (e) {
+                awe.updateMediaBody('create');
+            });
+            awe.modalBodyElm.find('.js-action-upload').on('click', function (e) {
+                awe.modalBodyElm.find('[name=mode]').val('upload');
+                awe.updateMediaBody('upload');
+            });
+
+        }
+
+    }
+
+    window.summernote_media_button = function (context) {
+        var ui = $.summernote.ui;
+        var button = ui.button({
+            contents: '<i class="fas fa-image"/>',
+            tooltip: 'media',
+            click: function(event){
+                awe.snContext = context;
+                awe.openModal(this,event);
+            }
+        });
+
+        return button.render(); // return button as jquery object
+    }
+    window.summernote_option = {
+        height: 300,
+        toolbar: [
+            ['style', ['style', 'bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'media', 'video']],
+            ['view', ['codeview']]
+        ],
+        buttons: {
+            media: window.summernote_media_button
+        },
+        styleTags: [
+            'p', 'h1', 'h2', 'h3', 'h4'
+        ],
+        paragraphTags: []
+    };
+
+</script>
 <!-- Initialize Quill editor -->
