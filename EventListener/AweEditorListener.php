@@ -81,37 +81,14 @@ class AweEditorListener implements EventSubscriberInterface
       if( $wysiwyg_frag )
       {
         $fileDir = $this->eccubeConfig['eccube_html_dir'] . '/AttachWysiwygEditor/summernote/dist';
-        $output = '<script>$(document).ready(function() {';
+
+        $output = "<script>$(document).ready(function() {\r\n";
         foreach( $selector_list as $selector )
         {
-          $output .= <<< EOD
-              $('{$selector}').summernote({
-                height: 300,
-                toolbar: [
-                  // [groupName, [list of button]]
-                  ['style', ['style' ,'bold', 'italic', 'underline', 'strikethrough',  'clear']],
-                  ['color', ['color']],
-                  ['para', ['ul', 'ol', 'paragraph']],
-                  ['table', ['table']],
-                  ['insert', ['link', 'picture', 'video']],
-                  ['view', ['codeview']]
-                ],
-                styleTags: [
-                  'p', 'h1', 'h2', 'h3', 'h4'
-                ],
-                paragraphTags: []
-                // callbacks: {
-                //   onEnter: function (c) {
-                //     c.preventDefault();
-                //     console.log(this);
-                //     console.log(c.target.innerHTML);
-                //     // c.target.innerHTML.replace("<p><br></p><p><br></p>","<p><br></p>");
-                //   }
-                // }
-             });
-EOD;
+          $output .= "$('{$selector}').summernote(window.summernote_option);\r\n";
         }
-        $output .= '});</script>';
+        $output .= "});</script>";
+
         
         $event->addSnippet( '@AttachWysiwygEditor/admin/awe.twig' );
         $event->addSnippet( $output , false);
