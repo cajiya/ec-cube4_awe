@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>AWE media library</title>
     <link rel="icon" href="{{ asset('assets/img/favicon.ico', 'admin') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css', 'admin') }}">
 </head>
 <body id="page_{{ app.request.get('_route') }}">
 
+    <div id="awe_media">
+    {{ include('@admin/alert.twig') }}
+
     <form name="form1" id="form1" method="post" action="?" enctype="multipart/form-data" style="background: #eff0f4;">
+
         <input type="hidden" id="awe_m_i_mode" name="mode" value=""/>
         <input type="hidden" id="awe_m_i_now_dir" name="now_dir" value="{{ tpl_now_dir }}"/>
         <input type="hidden" id="awe_m_i_tree_select_file" name="tree_select_file" value="{{ tpl_now_dir }}"/>
@@ -121,7 +124,6 @@
             
         </div>
     </form>
-
-
+    </div>
 </body>
 </html>
