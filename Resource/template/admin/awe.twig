@@ -41,7 +41,7 @@
         },
         findFormFromHtmlString: function( data ){
             var doc = new DOMParser().parseFromString(data, "text/html");
-            return doc.body.querySelector('form');
+            return doc.body.querySelector('#awe_media');
         },
         updateMediaBody: function( mode ){
             var ajaxOption = {

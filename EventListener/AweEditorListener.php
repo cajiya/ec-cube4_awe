@@ -81,13 +81,13 @@ class AweEditorListener implements EventSubscriberInterface
       if( $wysiwyg_frag )
       {
         $fileDir = $this->eccubeConfig['eccube_html_dir'] . '/AttachWysiwygEditor/summernote/dist';
-        $output = "<script>$(document).ready(function() {\r\n";        foreach( $selector_list as $selector )
+        $output = "<script>$(document).ready(function() {\r\n";
+        foreach( $selector_list as $selector )
         {
           $output .= "$('{$selector}').summernote(window.summernote_option);\r\n";
         }
         $output .= "});</script>";
 
-        
         $event->addSnippet( '@AttachWysiwygEditor42/admin/awe.twig' );
         $event->addSnippet( $output , false);
       }
