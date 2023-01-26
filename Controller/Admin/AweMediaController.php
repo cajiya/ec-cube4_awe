@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\AttachWysiwygEditor\Controller\Admin;
+namespace Plugin\AttachWysiwygEditor42\Controller\Admin;
 
 use Eccube\Controller\AbstractController;
 use Eccube\Util\FilesystemUtil;
@@ -41,7 +41,7 @@ class AweMediaController extends AbstractController
 
     /**
      * @Route("/%eccube_admin_route%/awe/media", name="awe_admin_media", methods={"GET", "POST"})
-     * @Template("@AttachWysiwygEditor/admin/awe_media.twig")
+     * @Template("@AttachWysiwygEditor42/admin/awe_media.twig")
      */
     public function index(Request $request)
     {
