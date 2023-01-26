@@ -1,33 +1,47 @@
+.note-editor .dropdown-toggle::after {
+  all: unset
+}
+.note-editor .note-dropdown-menu {
+  box-sizing: content-box
+}
+.note-editor .note-modal-footer {
+  box-sizing: content-box
+}
 .note-para .note-icon-caret::before,
 .note-table .note-icon-caret::before,
-.note-style .note-icon-caret::before{
-    display:none;
+.note-style .note-icon-caret::before {
+  display: none;
 }
 .note-color .dropdown-toggle::after {
-    display:none;
+  display: none;
 }
+
 .note-editable h1,
 .note-editable h2,
 .note-editable h3,
 .note-editable h4,
-.note-editable h5{
-    font-weight: bold;
-    margin: .5em 0 .25em;
+.note-editable h5 {
+  font-weight: bold;
+  margin: .5em 0 .25em;
 }
 
 .note-editable ul,
 .note-editable ol {
-    padding-left: 40px;
+  padding-left: 40px;
 }
+
 .note-editable ul li {
-    list-style: disc;
+  list-style: disc;
 }
+
 .note-editable ul li ul li {
-    list-style: circle;
+  list-style: circle;
 }
+
 .note-editable ol li {
-    list-style: decimal;
+  list-style: decimal;
 }
+
 .note-editable ol li ol li {
-    list-style: lower-alpha;
+  list-style: lower-alpha;
 }
