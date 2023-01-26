@@ -8,7 +8,7 @@
 
 ```
 cd app/Plugin;
-git clone https://github.com/cajiya/ec-cube4_awe.git;
+git clone -b 4.2 https://github.com/cajiya/ec-cube4_awe.git;
 mv ec-cube4_awe AttachWysiwygEditor42;
 cd ../../;
 php bin/console eccube:plugin:install --code="AttachWysiwygEditor42"
