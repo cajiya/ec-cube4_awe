@@ -1,6 +1,6 @@
 {
   "name": "ec-cube/attachwysiwygeditor42",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Wysiwyg Editor設定プラグイン(4.2系)",
   "type": "eccube-plugin",
   "require": {
